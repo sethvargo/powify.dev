@@ -84,9 +84,9 @@ div.page {
   -o-box-shadow: 0px 2px 7px #999999;
   box-shadow: 0px 2px 7px #999999;
   margin: 36px auto;
-  padding: 36px 90px;
+  padding: 36px 0;
   position: relative;
-  width: 480px;
+  width: 660px;
 }
 
 /* line 19, ../../app/stylesheets/screen.scss */
@@ -95,18 +95,24 @@ div.page {
 }
 
 /* line 23, ../../app/stylesheets/screen.scss */
+.wrap {
+  padding-left: 90px;
+  padding-right: 90px;
+}
+
+/* line 28, ../../app/stylesheets/screen.scss */
 h1, h2, p, li {
   font-family: Helvetica, sans-serif;
   font-size: 13px;
 }
 
-/* line 28, ../../app/stylesheets/screen.scss */
+/* line 33, ../../app/stylesheets/screen.scss */
 h1 {
   line-height: 45px;
   font-size: 36px;
 }
 
-/* line 33, ../../app/stylesheets/screen.scss */
+/* line 38, ../../app/stylesheets/screen.scss */
 h1:before {
   font-size: 66px;
   line-height: 42px;
@@ -114,81 +120,86 @@ h1:before {
   right: 576px;
 }
 
-/* line 40, ../../app/stylesheets/screen.scss */
+/* line 45, ../../app/stylesheets/screen.scss */
 .big h1:before {
   right: 819px;
 }
 
-/* line 44, ../../app/stylesheets/screen.scss */
+/* line 49, ../../app/stylesheets/screen.scss */
 h1.ok {
   color: #060;
 }
 
-/* line 48, ../../app/stylesheets/screen.scss */
+/* line 53, ../../app/stylesheets/screen.scss */
 h1.ok:before {
   content: "✓";
   color: #090;
 }
 
-/* line 53, ../../app/stylesheets/screen.scss */
+/* line 58, ../../app/stylesheets/screen.scss */
 h1.err {
   color: #600;
 }
 
-/* line 57, ../../app/stylesheets/screen.scss */
+/* line 62, ../../app/stylesheets/screen.scss */
 h1.err:before {
   content: "✗";
   color: #900;
 }
 
-/* line 62, ../../app/stylesheets/screen.scss */
+/* line 67, ../../app/stylesheets/screen.scss */
 h2 {
   line-height: 27px;
   font-size: 18px;
   font-weight: normal;
 }
 
-/* line 68, ../../app/stylesheets/screen.scss */
+/* line 73, ../../app/stylesheets/screen.scss */
 a, pre span {
   color: #776;
 }
 
-/* line 72, ../../app/stylesheets/screen.scss */
+/* line 77, ../../app/stylesheets/screen.scss */
 h2, p, pre {
   color: #222;
 }
 
-/* line 76, ../../app/stylesheets/screen.scss */
+/* line 81, ../../app/stylesheets/screen.scss */
 pre {
   white-space: pre-wrap;
   font-size: 13px;
 }
 
-/* line 81, ../../app/stylesheets/screen.scss */
+/* line 86, ../../app/stylesheets/screen.scss */
 pre, code {
   font-family: Menlo, Monaco, monospace;
 }
 
-/* line 85, ../../app/stylesheets/screen.scss */
+/* line 90, ../../app/stylesheets/screen.scss */
 p code {
   font-size: 12px;
 }
 
-/* line 89, ../../app/stylesheets/screen.scss */
+/* line 94, ../../app/stylesheets/screen.scss */
 pre.breakout {
+  background: #fafcf4;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  background: #fafcf4;
-  margin: 20px -90px;
+  margin-top: 20px;
   padding: 8px 0 8px 90px;
 }
 
-/* line 97, ../../app/stylesheets/screen.scss */
+/* line 102, ../../app/stylesheets/screen.scss */
 pre.small_text {
   font-size: 10px;
 }
 
-/* line 101, ../../app/stylesheets/screen.scss */
+/* line 106, ../../app/stylesheets/screen.scss */
 pre.small_text strong {
   font-size: 13px;
+}
+
+/* line 110, ../../app/stylesheets/screen.scss */
+.none {
+  display: none;
 }

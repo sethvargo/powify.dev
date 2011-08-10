@@ -1,8 +1,10 @@
 .page
-  %h1#status Loading...
+  .wrap
+    %h1#status Loading...
+
   #body
 
-  %section
+  .wrap
     %ul
       %li= link_to 'Powify.dev on github', 'https://github.com/sethvargo/powify.dev'
 
@@ -34,7 +36,7 @@
   }
 
   function addStatus(statusJSON) {
-    var $status = $('<div id="status" class="box"></div>');
+    var $status = $('<div id="status" class="none"></div>');
     var $preStatus = $('<pre id="pre-status" class="breakout"></pre>');
       $preStatus.html('<h2>Server Status</h2>');
 
@@ -45,10 +47,11 @@
 
     $status.append($preStatus);
     $('#body').append($status);
+    $status.slideDown('slow');
   }
 
   function addConfig(configJSON) {
-    var $config = $('<div id="config"></div>');
+    var $config = $('<div id="config" class="none"></div>');
     var $preConfig = $('<pre id="pre-config" class="breakout"></pre>');
       $preConfig.html('<h2>Server Config</h2>');
 
@@ -59,12 +62,23 @@
 
     $config.append($preConfig);
     $('#body').append($config);
+    $config.slideDown('slow');
   }
 
   function addApps(appsJSON) {
     var $apps = $('<div id="apps"></div>');
 
     $.each(appsJSON, function(app, data) {
-      console.log(app);
+      buildApp(app, data);
     });
+  }
+
+  function buildApp(app, data) {
+    var $app = $('<div id="'+app+'"></div>');
+    var $preApp = $('<pre id="pre-'+app+'" class="breakout"></pre>');
+      $preApp.html('<h2>'+app+'</h2>');
+
+    $app.append($preApp);
+
+    $('#body').append($app);
   }
