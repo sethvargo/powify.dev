@@ -16,7 +16,7 @@
         setTitle('Pow is running');
         addStatus(data.status);
         addConfig(data.config);
-        addApps();
+        addApps(data.apps);
       },
       failure : function(data, status, xhr) {
         changeIcon('err');
@@ -62,5 +62,9 @@
   }
 
   function addApps(appsJSON) {
-    console.log(appsJSON);
+    var $apps = $('<div id="apps"></div>');
+
+    $.each(appsJSON, function(app, data) {
+      console.log(app);
+    });
   }
