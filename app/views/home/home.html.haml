@@ -1,0 +1,66 @@
+.page
+  %h1#status Loading...
+  #body
+
+  %section
+    %ul
+      %li= link_to 'Powify.dev on github', 'https://github.com/sethvargo/powify.dev'
+
+:javascript
+  $(function() {
+    $.ajax({
+      url : '#{proxy_url(:format => :json)}',
+      type : 'GET',
+      success : function(data, status, xhr) {
+        changeIcon('ok');
+        setTitle('Pow is running');
+        addStatus(data.status);
+        addConfig(data.config);
+        addApps();
+      },
+      failure : function(data, status, xhr) {
+        changeIcon('err');
+        setTitle('Pow is not running');
+      }
+    });
+  });
+
+  function changeIcon(newIcon) {
+    $('#status').addClass(newIcon);
+  }
+
+  function setTitle(newTitle) {
+    $('#status').html(newTitle);
+  }
+
+  function addStatus(statusJSON) {
+    var $status = $('<div id="status" class="box"></div>');
+    var $preStatus = $('<pre id="pre-status" class="breakout"></pre>');
+      $preStatus.html('<h2>Server Status</h2>');
+
+    $.each(statusJSON, function(key, value) {
+      $preStatus.append('<strong>'+key+'</strong>: '+value);
+      $preStatus.append('\n');
+    });
+
+    $status.append($preStatus);
+    $('#body').append($status);
+  }
+
+  function addConfig(configJSON) {
+    var $config = $('<div id="config"></div>');
+    var $preConfig = $('<pre id="pre-config" class="breakout"></pre>');
+      $preConfig.html('<h2>Server Config</h2>');
+
+    $.each(configJSON, function(key, value) {
+      $preConfig.append('<strong>'+key+'</strong>: '+value);
+      $preConfig.append('\n');
+    });
+
+    $config.append($preConfig);
+    $('#body').append($config);
+  }
+
+  function addApps(appsJSON) {
+    console.log(appsJSON);
+  }

@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title Powify Web
+    = stylesheet_link_tag %w(screen)
+    = javascript_include_tag %w(jquery jquery-ujs  application)
+    = csrf_meta_tag
+
+  %body
+    = yield
