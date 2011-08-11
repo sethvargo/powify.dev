@@ -23,6 +23,8 @@ class ProxyController < ApplicationController
           :powrc => powrc(pow_app),
           :rvmrc => rvmrc(pow_app)
         }.reject{|k,v| v.nil?}
+
+        pow_apps[pow_app] = nil if pow_apps[pow_app].empty?
       end
     end
 

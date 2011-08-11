@@ -4,7 +4,9 @@
 
   #body
 
-  .wrap
+  #apps.wrap
+
+  .wrap{:style => 'margin-top: 20px'}
     %ul
       %li= link_to 'Powify.dev on github', 'https://github.com/sethvargo/powify.dev'
 
@@ -20,7 +22,7 @@
         addConfig(data.config);
         addApps(data.apps);
       },
-      failure : function(data, status, xhr) {
+      error : function(data, status, xhr) {
         changeIcon('err');
         setTitle('Pow is not running');
       }
@@ -66,19 +68,50 @@
   }
 
   function addApps(appsJSON) {
-    var $apps = $('<div id="apps"></div>');
+    var $apps = $('<div id="apps" class="none"></div>');
+    var $preApps = $('<pre id="pre-apps" class="breakout"></pre>');
+      $preApps.html('<h2>My Apps</h2>');
 
     $.each(appsJSON, function(app, data) {
-      buildApp(app, data);
+      buildApp(app, data, $preApps);
     });
+
+    $apps.append($preApps);
+    $('#body').append($apps);
+    $apps.slideDown('slow');
   }
 
-  function buildApp(app, data) {
-    var $app = $('<div id="'+app+'"></div>');
-    var $preApp = $('<pre id="pre-'+app+'" class="breakout"></pre>');
-      $preApp.html('<h2>'+app+'</h2>');
+  function buildApp(app, data, target) {
+    var $app = $('<a href="#">'+app+'</a><br />');
+    var $infoDiv = $('<div class="none" style="padding:0 0 20px 20px;"></div>');
 
-    $app.append($preApp);
+    if(data == null || typeof(data) == "undefined") {
+      $infoDiv.append('No data');
+    } else {
+      $.each(data, function(key, value) {
+        recurseData($infoDiv, key, value, 1);
+      });
+    }
 
-    $('#body').append($app);
+    $app.click(function() {
+      $infoDiv.slideToggle('fast');
+      return false;
+    });
+
+    target.append($app);
+    target.append($infoDiv);
+  }
+
+  function recurseData(infoDiv, key, value, depth) {
+    if(typeof(value) == "object") {
+      infoDiv.append('<strong style="font-style:italic;">'+key+'</strong>: ');
+      infoDiv.append('<br />');
+      $.each(value, function(k, v) {
+        recurseData(infoDiv, k, v, depth+1);
+      });
+    } else {
+      infoDiv.append('<strong style="padding-left:'+(10*depth)+'px">'+key+'</strong>: ');
+      infoDiv.append(value);
+      infoDiv.append('<br />');
+    }
   }

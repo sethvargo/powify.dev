@@ -160,7 +160,7 @@ a, pre span {
 }
 
 /* line 77, ../../app/stylesheets/screen.scss */
-h2, p, pre {
+h2, p, pre, pre a {
   color: #222;
 }
 
