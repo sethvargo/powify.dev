@@ -1,18 +1,13 @@
 class HomeController < ApplicationController
-    def home
-    	io = IO.popen('ifconfig')
-		ifconfig = io.readlines
+	require 'socket'
 
-		@ip ||= []
+	def home
+		ip= private_ip.ip_address unless private_ip.nil?
+		@host = ip
+	end
 
-		ifconfig.each do |config|
-			a = config.scan(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/)
-			a.each do |ip|
-				@ip << ip unless ip.empty? || ip.include?("127.0.0.1") || ip.include?("192.168.1.1") || ip.include?("localhost")
-			end
-		end
+	def private_ip
+		Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
+	end
 
-		@host = @ip[0]
-
-    end
 end
