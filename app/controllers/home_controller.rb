@@ -1,8 +1,13 @@
 class HomeController < ApplicationController
-    def home
-    	io = IO.popen('ifconfig')
-		ifconfig = io.readlines
-		ip = ifconfig[11].scan(/\ \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\ /)
-		@host = ip.to_s[3..-4]
-    end
+	require 'socket'
+
+	def home
+		ip= private_ip.ip_address unless private_ip.nil?
+		@host = ip
+	end
+
+	def private_ip
+		Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
+	end
+
 end
