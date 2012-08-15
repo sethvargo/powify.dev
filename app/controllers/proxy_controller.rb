@@ -21,7 +21,8 @@ class ProxyController < ApplicationController
           :powconfig => powconfig(pow_app),
           :powenv => powenv(pow_app),
           :powrc => powrc(pow_app),
-          :rvmrc => rvmrc(pow_app)
+          :rvmrc => rvmrc(pow_app),
+          :rbenv => rbenv_version(pow_app)
         }.reject{|k,v| v.nil?}
 
         pow_apps[pow_app] = nil if pow_apps[pow_app].empty?
@@ -64,6 +65,16 @@ class ProxyController < ApplicationController
     powenv.each do |line|
       hash[$1.strip.to_sym] = $2.strip if line =~ /\s?export\s?(.+)=(.+)/i
     end unless powenv.nil?
+
+    return hash.empty? ? nil : hash
+  end
+
+  def rbenv_version(pow_app)
+    rbenv_path = "#{@pow_path}/#{pow_app}/.rbenv-version"
+    rbenv_version = File.open(rbenv_path).readlines.join("\n") if File.exists?(rbenv_path)
+
+    hash = {}
+    hash[:ruby] = rbenv_version if rbenv_version
 
     return hash.empty? ? nil : hash
   end
