@@ -91,12 +91,14 @@
       $.each(data, function(key, value) {
         recurseData($infoDiv, key, value, 1);
       });
-      $infoDiv.append('<br />');
-      $infoDiv.append('<a href="http://'+app+'.dev/" target="_blank">Open '+app+'</a>');
-      $infoDiv.append('<br />');
-      $infoDiv.append('<a href="http://'+app+'.#{@host}.xip.io/" target="_blank">Open xip.io url</a>');
-      $infoDiv.append('<br />');
     }
+
+    $infoDiv.append('<br />');
+    $infoDiv.append('<a href="http://'+app+'.dev/" target="_blank">Open '+app+'</a>');
+    $infoDiv.append('<br />');
+    $infoDiv.append('<a href="http://'+app+'.#{@host}.xip.io/" target="_blank">Open xip.io url</a>');
+    $infoDiv.append('<br />');
+
 
     $app.click(function() {
       $infoDiv.slideToggle('fast');
