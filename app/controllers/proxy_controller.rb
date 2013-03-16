@@ -16,7 +16,7 @@ class ProxyController < ApplicationController
     @pow_path = "#{File.expand_path('~/.pow')}"
     pow_apps = {}
     Dir.foreach(@pow_path) do |pow_app|
-      unless %w(. .. powify).include?(pow_app)
+      unless %w(. .. powify .DS_Store).include?(pow_app)
         pow_apps[pow_app] = {
           :powconfig => powconfig(pow_app),
           :powenv => powenv(pow_app),
