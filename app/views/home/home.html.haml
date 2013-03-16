@@ -4,6 +4,11 @@
 
   #body
 
+    - flash.each do |key, value|
+      #status
+        %pre#pre-status.breakout
+          %h2= raw value
+
   #apps.wrap
 
   .wrap{:style => 'margin-top: 20px'}
@@ -98,6 +103,7 @@
     $infoDiv.append('<br />');
     $infoDiv.append('<a href="http://'+app+'.#{@host}.xip.io/" target="_blank">Open xip.io url</a>');
     $infoDiv.append('<br />');
+    $infoDiv.append('<a href="http://powify.dev/'+app+'/delete">Delete '+app+'</a>');
 
 
     $app.click(function() {

@@ -32,6 +32,19 @@ class ProxyController < ApplicationController
     pow_apps.to_json
   end
 
+  # for deleting pow apps
+  def delete
+    @exists = apps.include?(params[:app])
+    @app = params[:app] unless @exists == false
+
+    if @exists
+      `rm #{File.expand_path("~/.pow/#{@app}")}`
+      redirect_to root_path, :notice => "Pow app deleted"
+    else
+      render :text => "Given app is not a Pow app"
+    end
+  end
+
   private
   def make_request(url)
     url = URI.parse(url)
